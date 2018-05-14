@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { WrappedFieldProps }from 'redux-form';
+import ReactJson from 'react-json-view'
+import { WrappedFieldProps } from 'redux-form'
 
 interface IInputField {
   label: string
@@ -10,6 +11,7 @@ export const InputField:React.SFC<IInputField & WrappedFieldProps> = props => (
   <div>
     <label>{props.label}</label>
     <input {...props.input} type={props.type} />
+    <ReactJson src={props.meta} />
   </div>
 )
 
