@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { Field, InjectedFormProps, reduxForm} from 'redux-form'
-import { InputField } from './Fields'
+import { Field, Form, InjectedFormProps, reduxForm} from 'redux-form'
+import { InputField, SelectField } from './Fields'
 
 
 interface IRegisterFormProps  {
@@ -12,22 +12,12 @@ class RegisterForm extends React.Component<IRegisterFormProps & InjectedFormProp
   public render() {
     const { handleSubmit } = this.props
     return(
-      <form onSubmit = { handleSubmit }>
-        <Field name='name' component={InputField} type="text" label="Name"  />
-        <div>
-          <label>Preferred Format</label>
-          <Field name="preference" component="select" >
-            <option />
-            <option value="tabs">Tabs</option>
-            <option value="spaces">Spaces</option>
-          </Field>
-        </div>
-        <div>
-          <label>Newsletter?</label>
-          <Field name="newsletter" component="input" type="checkbox" />
-        </div>
+      <Form onSubmit = { handleSubmit } >
+        <Field name="name" component={InputField} type="text" label="Name"  />
+        <Field name="newsletter" component={SelectField} label="Preferred Formating" />
+        <Field name="preference" component={InputField} type="checkbox" label="Sign up for Newsletter" />
         <button type="submit">Submit</button>
-      </form>
+      </Form>
     ) 
   }
 }

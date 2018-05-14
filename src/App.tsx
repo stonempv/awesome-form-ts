@@ -10,8 +10,15 @@ class App extends React.Component {
   }
   public render() {
     return (
-      <RegisterForm onSubmit={ this.submit } />
-    );
+      <RegisterForm onSubmit={ this.submit } initialValues={ this.getInitialValues() }/>
+    )
+  }
+
+  public getInitialValues() {
+    return {
+      newsletter: true,
+      preference: 'spaces' 
+    }
   }
 }
 
