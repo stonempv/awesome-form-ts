@@ -1,7 +1,7 @@
 import * as capitalize  from 'capitalize'
 import * as React from 'react'
-import { Field, InjectedFormProps, reduxForm } from 'redux-form'
-import { InputField, SelectField } from './Fields'
+import { Field, FieldArray, InjectedFormProps, reduxForm } from 'redux-form'
+import { discount, InputField, SelectField  } from './Fields'
 
 import './RegisterForm.css'
 import { 
@@ -78,7 +78,11 @@ class RegisterForm<T> extends React.Component<IRegisterFormProps & InjectedFormP
           label="Sign up for Newsletter" 
         />
 
-      
+        <FieldArray 
+          name="discountCodes"
+          component={discount}
+        />
+
         <button type="submit">Submit</button>
       </form>
     ) 
