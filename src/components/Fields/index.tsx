@@ -9,7 +9,10 @@ interface IInputField {
   type: string
 }
 
-const getValidityClassName = (meta:WrappedFieldMetaProps) => {
+const getValidityClassName = (meta:WrappedFieldMetaProps):string | undefined => {
+  if(meta.asyncValidating) {
+    return 'async-validating'
+  }
   if(meta.active) {
     return undefined
   }

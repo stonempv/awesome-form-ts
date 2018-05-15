@@ -1,27 +1,14 @@
 import * as React from 'react'
-import { SubmissionError } from 'redux-form'
 import RegisterForm from './components/RegisterForm'
-
-interface IFormFields  {
-  firstname?: string
-  lastname?: string
-  username?: string
-  password?: string
-  confirmPassword?: string
-}
+import { IFormFields } from './components/Validation'
 
 
 class App extends React.Component {
 
-  public submit = (values:IFormFields): void => {
-    if(['kent', 'andy', 'joel', 'john'].includes(values.username as string)) {
-      throw new SubmissionError({
-        username: 'Username already taken'
-      })
-    } else {
-      alert(JSON.stringify(values, null, 4)) 
-    }
+  public submit = <T extends IFormFields>(values:T): void => {
+    alert(JSON.stringify(values, null, 4)) 
   }
+
   public render() {
     return (
       <RegisterForm 
@@ -31,7 +18,9 @@ class App extends React.Component {
     )
   }
 
-  public getInitialValues() {
+  
+
+  public getInitialValues(){
     return {
       newsletter: 'true',
       preference: 'spaces' 

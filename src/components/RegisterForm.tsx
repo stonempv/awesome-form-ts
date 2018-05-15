@@ -3,6 +3,7 @@ import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 import { InputField, SelectField } from './Fields'
 import './RegisterForm.css'
 import { 
+  asyncValidate,
   matchesPassword,
   maxLength,
   minLength,
@@ -14,7 +15,7 @@ interface IRegisterFormProps  {
   handleSubmit: () => void
 }
 
-class RegisterForm extends React.Component<IRegisterFormProps & InjectedFormProps<{}, IRegisterFormProps>> {
+class RegisterForm<T> extends React.Component<IRegisterFormProps & InjectedFormProps<T, IRegisterFormProps>> {
   
   public render() {
     const { handleSubmit } = this.props
@@ -73,8 +74,7 @@ class RegisterForm extends React.Component<IRegisterFormProps & InjectedFormProp
           label="Sign up for Newsletter" 
         />
 
-       
-
+      
         <button type="submit">Submit</button>
       </form>
     ) 
@@ -82,6 +82,8 @@ class RegisterForm extends React.Component<IRegisterFormProps & InjectedFormProp
 }
 
 const ReduxRegisterForm = reduxForm({
+  asyncBlurFields: ['username'],
+  asyncValidate,
   form: 'register'
 })(RegisterForm)
 
