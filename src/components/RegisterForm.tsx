@@ -1,6 +1,8 @@
+import * as capitalize  from 'capitalize'
 import * as React from 'react'
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 import { InputField, SelectField } from './Fields'
+
 import './RegisterForm.css'
 import { 
   asyncValidate,
@@ -27,6 +29,7 @@ class RegisterForm<T> extends React.Component<IRegisterFormProps & InjectedFormP
           type="text" 
           label="First Name" 
           validate={[required]}
+          normalize={capitalize}
         />
 
         <Field 
@@ -35,6 +38,7 @@ class RegisterForm<T> extends React.Component<IRegisterFormProps & InjectedFormP
           type="text" 
           label="Last Name" 
           validate={[required]}
+          normalize={capitalize}
         />
 
         <Field 
