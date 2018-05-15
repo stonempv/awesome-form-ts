@@ -1,11 +1,12 @@
 import * as React from 'react'
-import { Field, InjectedFormProps, reduxForm} from 'redux-form'
+import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 import { InputField, SelectField } from './Fields'
 import './RegisterForm.css'
 import { 
-  required,
+  matchesPassword,
   maxLength,
-  minLength
+  minLength,
+  required
 } from './Validation'
 
 
@@ -43,6 +44,22 @@ class RegisterForm extends React.Component<IRegisterFormProps & InjectedFormProp
           validate={[required, minLength, maxLength]}
         />
 
+         <Field 
+          name="password" 
+          component={InputField} 
+          type="password" 
+          label="Password" 
+          validate={[required]}
+        />
+
+         <Field 
+          name="confirmPassword" 
+          component={InputField} 
+          type="password" 
+          label="Confirm Password" 
+          validate={[required, matchesPassword]}
+        />
+
         <Field 
           name="newsletter" 
           component={SelectField} 
@@ -56,12 +73,7 @@ class RegisterForm extends React.Component<IRegisterFormProps & InjectedFormProp
           label="Sign up for Newsletter" 
         />
 
-        <Field 
-          name="password" 
-          component={InputField} 
-          type="password" 
-          label="Password" 
-        />
+       
 
         <button type="submit">Submit</button>
       </form>

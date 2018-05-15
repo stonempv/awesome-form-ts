@@ -9,7 +9,7 @@ interface IInputField {
   type: string
 }
 
-const getValidityClassName = (meta:WrappedFieldMetaProps):string | undefined => {
+const getValidityClassName = (meta:WrappedFieldMetaProps) => {
   if(meta.active) {
     return undefined
   }
@@ -36,7 +36,8 @@ export const InputField:React.SFC<IInputField & WrappedFieldProps> = props => {
     >
       <input {...input} type={type} />
       <label>{label}</label>
-      {(meta.error && meta.touched) && (
+      {(meta.error && meta.touched) && 
+      !meta.active && (
         <div className="feedback-text error-text">{meta.error}</div>
       )}
     </div>
