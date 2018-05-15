@@ -1,19 +1,47 @@
+import * as cx  from 'classnames'
 import * as React from 'react'
-import ReactJson from 'react-json-view'
-import { WrappedFieldProps } from 'redux-form'
+// import ReactJson from 'react-json-view'
+import { WrappedFieldMetaProps, WrappedFieldProps } from 'redux-form'
+
 
 interface IInputField {
   label: string
   type: string
 }
 
-export const InputField:React.SFC<IInputField & WrappedFieldProps> = props => (
-  <div>
-    <label>{props.label}</label>
-    <input {...props.input} type={props.type} />
-    <ReactJson src={props.meta} />
-  </div>
-)
+const getValidityClassName = (meta:WrappedFieldMetaProps):string | undefined => {
+  if(meta.active) {
+    return undefined
+  }
+  if (meta.touched && meta.invalid){
+    return 'invalid'
+  }
+  if (meta.touched && meta.valid){
+    return 'valid'
+  } else {
+    return undefined
+  }
+}
+
+export const InputField:React.SFC<IInputField & WrappedFieldProps> = props => {
+  const { label, input, type, meta } = props
+  return (
+    <div
+      className={cx(
+        'custom-input-container',
+        { 'flex-row-reverse': type === 'checkbox'},
+        { dirty: meta.dirty},
+        getValidityClassName(meta)
+      )}
+    >
+      <input {...input} type={type} />
+      <label>{label}</label>
+      {(meta.error && meta.touched) && (
+        <div className="feedback-text error-text">{meta.error}</div>
+      )}
+    </div>
+  )
+}
 
 interface ISelectField {
   label: string
